@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .register-box {
+            width: 300px;
+            padding: 40px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .register-box h2 {
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .user-box {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .user-box input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            outline: none;
+            background: transparent;
+            color: #333;
+            transition: 0.3s;
+        }
+
+        .user-box input:focus {
+            border-color: #4CAF50;
+        }
+
+        .user-box label {
+            position: absolute;
+            left: 10px;
+            top: -10px;
+            font-size: 14px;
+            color: #333;
+            transition: 0.3s;
+            pointer-events: none;
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: mediumpurple;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .register-btn:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+
+        .login-link {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .login-link a {
+            color: mediumpurple;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<script>
+    function validateMobile() {
+        var mobileInput = document.getElementById("phoneInput").value;
+        var cleanedText = mobileInput.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+
+        if (cleanedText.length > 10) {
+            document.getElementById("phoneInput").value = cleanedText.slice(0, 10);
+        }
+    }
+</script>
+<body>
+
+    <div class="register-box">
+        <h2>Register To CDF Shop</h2>
+
+        
+        <form id="registerForm" onsubmit="return validateForm()">
+            <div class="user-box">
+                <input type="text" id="username" name="username" required>
+                <label>Username</label>
+                <span id="usernameError" class="error"></span>
+            </div>
+
+            <div class="user-box">
+                <input type="email" id="email" name="email" required>
+                <label>Email</label>
+                <span  id="emailInput" class="error"></span>
+            </div>
+
+            <div class="user-box">
+                <input type="text" id="phoneInput" name="phoneInput" placeholder="phone" oninput="validateMobile()" required="">
+                <label>Phone</label>
+                <span id="phoneError" class="error"></span>
+            </div>
+
+            <div class="user-box">
+                <input type="password" id="password" name="password" required>
+                <label>Password</label>
+                <span id="passwordError" class="error"></span>
+            </div>
+
+          
+
+            <input type="submit" class="register-btn" value="Register">
+        </form>
+
+        <div class="login-link">
+            <p>Already have an account? <a href="new login.html">Login</a></p>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            
+            document.getElementById('usernameError').textContent = "";
+            document.getElementById('emailError').textContent = "";
+            document.getElementById('phoneError').textContent = "";
+            document.getElementById('passwordError').textContent = "";
+            document.getElementById('confirmPasswordError').textContent = "";
+
+           
+            var username = document.getElementById('username').value;
+            var email = document.getElementById('email').value;
+            var phone = document.getElementById('phone').value;
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+
+            var isValid = true;
+
+           
+            if (username.trim() === "") {
+                document.getElementById('usernameError').textContent = "Username is required!";
+                isValid = false;
+            }
+
+            
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!email.match(emailPattern)) {
+                document.getElementById('emailError').textContent = "Invalid email address!";
+                isValid = false;
+            }
+
+            
+            var phonePattern = /^\d+$/;
+            if (!phone.match(phonePattern)) {
+                document.getElementById('phoneError').textContent = "Phone number must contain only digits!";
+                isValid = false;
+            } else if (phone.length < 10) {
+                document.getElementById('phoneError').textContent = "Phone number must be at least 10 digits long!";
+                isValid = false;
+            }
+
+            
+            if (password.length < 6) {
+                document.getElementById('passwordError').textContent = "Password must be at least 6 characters long!";
+                isValid = false;
+            }
+
+            
+            if (password !== confirmPassword) {
+                document.getElementById('confirmPasswordError').textContent = "Passwords do not match!";
+                isValid = false;
+            }
+
+            
+            if (isValid) {
+                alert("Registration successful!");
+                
+                window.location.href = "new login.html";
+            }
+
+           
+            return isValid;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,205 @@
+<?php
+session_start();
+
+
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+    // If already logged in, redirect to the home page
+    header("Location: home.php");
+    exit;
+}
+
+
+$username = $password = "";
+$username_err = $password_err = "";
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    if (empty(trim($_POST["username"]))) {
+        $username_err = "Please enter your phone number.";
+    } else {
+        $username = htmlspecialchars(trim($_POST["username"]));
+    }
+
+   
+    if (empty(trim($_POST["password"]))) {
+        $password_err = "Please enter your password.";
+    } else {
+        $password = htmlspecialchars(trim($_POST["password"]));
+    }
+
+    
+    if (empty($username_err) && empty($password_err)) {
+        
+        if ($username === "testphone" && $password === "password123") {
+           
+            $_SESSION['loggedin'] = true;
+            $_SESSION['username'] = $username;
+            session_regenerate_id();  
+
+            
+            header("Location: home.php");
+            exit;
+        } else {
+            
+            $login_err = "Invalid username or password.";
+        }
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('background.jpg'); 
+            background-size: cover;
+            background-position: center;
+        }
+
+        .login-box {
+            width: 300px;
+            padding: 40px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .login-box h2 {
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .user-box {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .user-box input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            outline: none;
+            background: transparent;
+            color: #333;
+            transition: 0.3s;
+        }
+
+        .user-box input:focus {
+            border-color: #4CAF50;
+        }
+
+        .user-box label {
+            position: absolute;
+            left: 10px;
+            top: -10px;
+            font-size: 14px;
+            color: #333;
+            transition: 0.3s;
+            pointer-events: none;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: mediumpurple;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #45a049;
+        }
+
+        .signup-link {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .signup-link a {
+            color: mediumpurple;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        
+        @media (max-width: 480px) {
+            .login-box {
+                width: 80%;
+                padding: 20px;
+            }
+
+            .login-box h2 {
+                font-size: 20px;
+            }
+
+            .user-box input {
+                font-size: 14px;
+            }
+
+            .login-btn {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<script>
+    function validateMobile() {
+        var mobileInput = document.getElementById("phoneInput").value;
+        var cleanedText = mobileInput.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+
+        if (cleanedText.length > 10) {
+            document.getElementById("phoneInput").value = cleanedText.slice(0, 10);
+        }
+    }
+</script>
+<body>
+
+    
+    <div class="login-box">
+       
+        
+        <h2>Login To CDF Shop</h2>
+        <form action="website.html" method="POST">
+            <div class="user-box">
+                <input type="text" id="phoneInput" name="phoneInput" placeholder="phone" oninput="validateMobile()" required="">
+                <label >Phone</label>
+            </div>              
+            <div class="user-box">
+                <input type="password" name="password" required="">
+                <label>Password</label>
+            </div>
+            <input type="submit" class="login-btn" value="Login">
+        </form>
+        <link href="website.html" rel="stylesheet" type="text/css" />
+
+        <div class="signup-link">
+            <p>Don't have an account? <a href="register.html">Create New Account</a></p>
+        </div>
+    </div>
+
+</body>
+</html>

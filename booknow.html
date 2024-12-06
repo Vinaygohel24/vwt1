@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <div class="menu-wrap">
+            <div class="logo">
+          </div>
+        <title>BookNow</title>
+        <style>
+  ul{
+  background-image: url('background.jpg');
+	margin:0;
+	padding:0;
+	display:flex;
+  }
+  
+   ul li{
+	list-style:none;
+	margin:0 20px;
+	transition:0.5s;
+  }
+  ul li a{
+	display: block;
+	position:relative;
+	text-decoration:none;
+	padding:5px;
+	font-size:18px;
+	font-family: sans-serif;
+	color:#fff;
+	text-transform:uppercase;
+	transition:0.5s;
+  }
+ 
+  ul li a:before{
+	content:'';
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:rgba(0, 0, 0, 0.36);
+	transition:0.5s;
+	transform-origin:right;
+	transform:scaleX(0);
+	z-index:-1;
+  } 
+  ul li a:hover:before{
+	transition:transform 0.5s;
+	transform-origin:left;
+	transform:scaleX(1);
+  }
+  header { 
+
+    background-color: #333; 
+
+    color: #fff; 
+
+    text-align: center; 
+
+    padding: 20px; 
+    }
+    main { 
+    background-color: #fff;
+
+    max-width: 600px; 
+
+    margin: 5px auto; 
+
+    /* text-align:center; */
+    } 
+    input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; 
+        }
+        .checkbox-label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .checkbox-input {
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        select {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; 
+        }
+        .product-price {
+             display: flex;
+             align-items: center;
+        }
+ 
+        .product-price span {
+            font-size: 26px;
+            font-weight: 300;
+            color: #43474D;
+            margin-right: 20px;
+        }
+        .cart-btn:hover {
+            background-color: #0000FF;
+        }
+        footer { 
+
+            background-color: #333; 
+
+            color: #fff; 
+
+            text-align: center; 
+
+            padding: 25px; 
+        }
+        .payment-btn-container {
+            text-align: center;
+        }
+        .payment-btn {
+        width:450px;
+        /* text-align:center; */
+        display: inline-block;
+        padding: 15px 25px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #0056b3;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    .payment-btn:hover {
+        background-color: #0056b3;
+    }
+    html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  /* background: #fff; */
+}
+
+        </style>
+  
+  <script>
+    // Define the JavaScript function to be called
+    function myFunction() {
+      var number = document.getElementById("phoneInput").value;
+    var email = document.getElementById("emailInput").value;
+
+    if (number.length !== 10) {
+                alert("Please enter a valid 10 number.");
+                return false; // Prevent form submission
+            }
+
+    // Proceed with form submission if all checks pass
+    return true;
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    var numberInput = document.getElementById("phoneInput");
+
+    numberInput.addEventListener("input", function(event) {
+        // Remove non-numeric characters from input value
+        numberInput.value = numberInput.value.replace(/\D/g, "");
+    });
+});
+function validateMobile() {
+            var mobileInput = document.getElementById("phoneInput").value;
+            var cleanedText = mobileInput.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+            
+            if (cleanedText.length > 10) {
+              document.getElementById("phoneInput").value = cleanedText.slice(0, 10);
+            }
+        }
+  
+  </script>
+  </head>
+    <body>   
+        <!--  style="background-image: url('background.jpg')"  -->
+        <div>        
+            <ul>
+            <img src="logo.png" height="50px" width="80px">
+           
+            <li><a href="Product.php">Home</a></li>
+            <li><a href="Product.php">products</a></li>
+            <li><a href="Product.php">About</a></li>
+            <li><a href="Product.php">Contact</a></li>
+            <!-- <li><a href="Product.php">products</a></li> -->
+
+           </ul>
+          </div>
+          <header>
+
+          </header>
+<main>
+          <div class="con-container">
+            <br><h2>Contact</h2>
+            <form action="payment.html" method="POST" onsubmit="return myFunction()">
+            <input type="text" id="emailInput" name="emailInput" placeholder="Email" required="">
+                <br><br>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="checkbox" name="checkbox" class="checkbox-input">
+                    Remember Me With News And Offers
+                </label>
+          
+            <h2>Delivery</h2>
+            <select id="selectBox" name="selectBox">
+                <option value="">---City---</option>
+                <option value="option1">Rajkot</option>
+                <option value="option2">Morbi </option>
+                <option value="option3">Ahemdabad </option>
+                <option value="option3">Kutch </option>
+                <option value="option3">Surat </option>
+            </select><br><br>
+
+            <input type="text" id="textbox" name="textbox" placeholder="First name" required=""><br><br>
+            <input type="text" id="textbox" name="textbox" placeholder="last name" required=""><br><br>
+            <input type="text" id="textbox" name="textbox" placeholder="Address" required=""><br><br>
+            <input type="text" id="phoneInput" name="phoneInput" placeholder="phone" oninput="validateMobile()" required=""><br><br>
+          </div>
+          <div class="payment-btn-container">
+            <button class="payment-btn" type="Submit" value="Submit" >Pay Now</button>
+          </form> </div><br><br>
+
+</main>
+          <footer>
+            <p2>     2024 Responsive  CDF Pet Shop</p2> 
+          </footer>
+          </body>
+</html>
